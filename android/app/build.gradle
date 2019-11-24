@@ -41,7 +41,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.learnflutter"
         minSdkVersion 16
         targetSdkVersion 28
@@ -60,22 +59,33 @@ android {
     }
 
     buildTypes {
+        // release {
+        //     signingConfig signingConfigs.release
+
+        //     minifyEnabled true
+        //     useProguard true
+
+        //     proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        // }
+        debug {
+            //多余的参数
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+        }
         release {
+            minifyEnabled true //混淆
+            zipAlignEnabled true   //Zipalign优化
+            shrinkResources false //删除无用资源
             signingConfig signingConfigs.release
-
-            minifyEnabled true
-            useProguard true
-
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    // buildTypes {
-    //     release {
-    //         // TODO: Add your own signing config for the release build.
-    //         // Signing with the debug keys for now, so `flutter run --release` works.
-    //         signingConfig signingConfigs.debug
-    //     }
-    // }
 }
 
 flutter {
@@ -85,6 +95,6 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:0.4'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
