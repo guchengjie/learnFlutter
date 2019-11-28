@@ -1,126 +1,68 @@
 import 'package:flutter/material.dart';
-// import 'package:english_words/english_words.dart';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget titleSection = new Container( // 生成一个容器
-      padding: const EdgeInsets.all(32.0),
-      color: Colors.white,
-      child: new Row(
-        children: <Widget>[
-          new Expanded(
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Container(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: new Text(
-                    'Oeschinen Lake Campground',
-                    style: new TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
-                      decoration: TextDecoration.none,
-                    )
-                  ),
-                ),
-                new Text(
-                  'Kandersteg, Switzerland',
-                  style: new TextStyle(
-                    color: Colors.grey[500],
-                    fontSize: 20.0,
-                    decoration: TextDecoration.none,
-                  )
-                )
-              ],
-            ),
-          ),
-          new Icon(
-            Icons.star,
-            color: Colors.red[500],
-            size: 40.0,
-          ),
-          new Text(
-            '41',
-            style: new TextStyle(
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ],
+    return new MaterialApp(
+      title: 'Flutter demo', // 应用名称
+      theme: ThemeData(
+        primaryColor: Colors.blue, // 应用主题
       ),
+      home: new CalculatorPage(title: 'Flutter Demo Home Page'), // 应用首页路由
     );
-    Column buildButtonColumn (IconData icon, String label) {
-      Color color = Theme.of(context).primaryColor;
-      return new Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          new Icon(icon, color: color),
-          new Container(
-            margin: const EdgeInsets.only(top: 8.0),
-            child: new Text(
-              label,
-              style: new TextStyle(
-                fontSize: 20.0,
-                color: color,
-                fontWeight: FontWeight.w400,
-                decoration: TextDecoration.none,
+  }
+}
+
+class CalculatorPage extends StatefulWidget {
+  CalculatorPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  CalculatorState createState() {
+    return new CalculatorState();
+  }
+}
+
+class CalculatorState extends State<CalculatorPage> {
+  int _counter = 0; // 声明点击次数的私有变量
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var floatingActionButton2 = FloatingActionButton(
+      onPressed: _incrementCounter,
+      child: Icon(Icons.add),
+      tooltip: 'add',
+    );
+    return new Scaffold(
+      appBar: new AppBar(title: new Text(widget.title)),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Text(
+              '在这里可以看到点击的次数',
+              style: TextStyle(
+                fontSize: 30.0,
+                backgroundColor: Colors.red
               )
             ),
-          )
-        ],
-      );
-    }
-
-    Widget buttonSection = Container( // 可加new 也可以不加
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          buildButtonColumn(Icons.call, 'CALL'),
-          buildButtonColumn(Icons.near_me, 'ROUTE'),
-          buildButtonColumn(Icons.share, 'SHARE'),
-        ],
-      ),
-    );
-
-    Widget textSection = new Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(32.0),
-      child: new Text(
-        '''
-        Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situated 1,578 meters above sea level, it is one of the larger Alpine Lakes. A gondola ride from Kandersteg, followed by a half-hour walk through pastures and pine forest, leads you to the lake, which warms to 20 degrees Celsius in the summer. Activities enjoyed here include rowing, and riding the summer toboggan run.
-        ''',
-        style: TextStyle(
-          fontSize: 30.0,
-          color: Colors.black87,
-          decoration: TextDecoration.none,
+            new Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display1,
+            )
+          ],
         ),
-        softWrap: true,
-        textAlign: TextAlign.left,
       ),
-    );
-
-    return new MaterialApp(
-      title: '学习布局',
-      theme: new ThemeData(
-        primaryColor: Colors.blue,
-      ),
-      home: new ListView(
-        children: [
-          new Image.asset(
-            'images/lake.jpg',
-            width: 600.0,
-            height: 240.0,
-            fit: BoxFit.cover,
-          ),
-          titleSection,
-          buttonSection,
-          textSection,
-        ],
-      ),
+      floatingActionButton: floatingActionButton2,
     );
   }
 }
