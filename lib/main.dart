@@ -58,11 +58,40 @@ class CalculatorState extends State<CalculatorPage> {
             new Text(
               '$_counter',
               style: Theme.of(context).textTheme.display1,
+            ),
+            FlatButton(
+              child: Text('create new route'),
+              textColor: Colors.blue,
+              onPressed: () {
+                //导航到新路由
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return new NewRoute();
+                    },
+                  )
+                );
+              },
             )
           ],
         ),
       ),
       floatingActionButton: floatingActionButton2,
+    );
+  }
+}
+
+class NewRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('new router'),
+      ),
+      body: Center(
+        child: Text('This is new route'),
+      ),
     );
   }
 }
