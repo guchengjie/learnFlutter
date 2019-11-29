@@ -62,16 +62,19 @@ class CalculatorState extends State<CalculatorPage> {
             FlatButton(
               child: Text('create new route'),
               textColor: Colors.blue,
-              onPressed: () {
+              onPressed: () async {
                 //导航到新路由
-                Navigator.push(
+                var result = await Navigator.push( // 导航器
                   context,
-                  MaterialPageRoute(
+                  MaterialPageRoute( // 继承PageRouter的路由组件
                     builder: (context) {
-                      return new NewRoute();
+                      return new NewRoute(text: '我是上一页的文字');
                     },
+                    // maintainState: true,
+                    // fullscreenDialog: true,
                   )
                 );
+                print(result);
               },
             )
           ],
@@ -83,6 +86,10 @@ class CalculatorState extends State<CalculatorPage> {
 }
 
 class NewRoute extends StatelessWidget {
+  NewRoute({ Key key, @required this.text }) : super(key : key);
+
+  final String text;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,9 +99,9 @@ class NewRoute extends StatelessWidget {
       body: Center(
         child: FlatButton(
           textColor: Colors.blue,
-          child: Text('go back'),
+          child: Text('go back params:$text'),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, '我是返回值');
           },
         ),
       ),
