@@ -10,7 +10,35 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue, // 应用主题
       ),
-      home: new CalculatorPage(title: 'Flutter Demo Home Page'), // 应用首页路由
+      initialRoute: '/', // 设置首页的路由key为“/”
+      routes: { // 路由表
+        // 'new_route': (context) => NewRoute(text: ModalRoute.of(context).settings.arguments),
+        '/': (context) => new CalculatorPage(title: 'Flutter Demo Home Page'), // 应用首页路由
+      },
+      // 当调用Navigator.pushNamed(...)打开命名路由时，如果指定的路由名在路由表中已注册，则会调用路由表中的builder函数来生成路由组件；
+      // 如果路由表中没有注册，才会调用onGenerateRoute来生成路由
+      onGenerateRoute: (RouteSettings settings) { // 按照路由来控制访问权限
+        return MaterialPageRoute(
+          builder: (context) {
+            String routeName = settings.name;
+            print(routeName);
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('我被拦截了'),
+              ),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('被拦截了，好惨')
+                  ],
+                ),
+              ),
+            );
+          }
+        );
+      },
+      // home: new CalculatorPage(title: 'Flutter Demo Home Page'), // 应用首页路由
     );
   }
 }
@@ -64,17 +92,8 @@ class CalculatorState extends State<CalculatorPage> {
               textColor: Colors.blue,
               onPressed: () async {
                 //导航到新路由
-                var result = await Navigator.push( // 导航器
-                  context,
-                  MaterialPageRoute( // 继承PageRouter的路由组件
-                    builder: (context) {
-                      return new NewRoute(text: '我是上一页的文字');
-                    },
-                    // maintainState: true,
-                    // fullscreenDialog: true,
-                  )
-                );
-                print(result);
+                var result = await Navigator.pushNamed(context, 'new_route', arguments: 'hi');
+                print('home: $result');
               },
             )
           ],
@@ -92,6 +111,7 @@ class NewRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('关闭当前路由也会执行一次build');
     return Scaffold(
       appBar: AppBar(
         title: Text('new router'),
@@ -101,7 +121,7 @@ class NewRoute extends StatelessWidget {
           textColor: Colors.blue,
           child: Text('go back params:$text'),
           onPressed: () {
-            Navigator.pop(context, '我是返回值');
+            Navigator.pop(context, 'hello');
           },
         ),
       ),
