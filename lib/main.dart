@@ -90,7 +90,13 @@ class NewRoute extends StatelessWidget {
         title: Text('new router'),
       ),
       body: Center(
-        child: Text('This is new route'),
+        child: FlatButton(
+          textColor: Colors.blue,
+          child: Text('go back'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }
