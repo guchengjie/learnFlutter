@@ -64,7 +64,23 @@ class CalculatorState extends State<CalculatorPage> {
   }
 
   @override
+  void initState() {
+    // 当Widget第一次插入到Widget树时会被调用，对于每一个State对象，Flutter framework只会调用一次该回调，所以，
+    // 通常在该回调中做一些一次性的操作，如状态初始化、订阅子树的事件通知等。
+    super.initState();
+    //print(widget); // 组件实例
+    print('initstate');
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('build');
+    // 它主要是用于构建Widget子树的
+    // 在调用initState()之后。
+    // 在调用didUpdateWidget()之后。
+    // 在调用setState()之后。
+    // 在调用didChangeDependencies()之后。
+    // 在State对象从树中一个位置移除后（会调用deactivate）又重新插入到树的其它位置之后。
     var floatingActionButton2 = FloatingActionButton(
       onPressed: _incrementCounter,
       child: Icon(Icons.add),
@@ -101,6 +117,42 @@ class CalculatorState extends State<CalculatorPage> {
       ),
       floatingActionButton: floatingActionButton2,
     );
+  }
+
+  @override
+  void didUpdateWidget(CalculatorPage oldWidget) {
+    // 组件树发生改变时，并且canUpdate为true才进行调用
+    super.didUpdateWidget(oldWidget);
+    print("didUpdateWidget");
+  }
+
+  @override
+  void deactivate() {
+    // State对象从树中被移除时，会调用此回调
+    super.deactivate();
+    print("deactive");
+  }
+
+  @override
+  void dispose() {
+    // 当State对象从树中被永久移除时调用；通常在此回调中释放资源
+    super.dispose();
+    print("dispose");
+  }
+
+  @override
+  void reassemble() {
+    // 此回调是专门为了开发调试而提供的，在热重载(hot reload)时会被调用，此回调在Release模式下永远不会被调用
+    super.reassemble();
+    print("reassemble");
+  }
+
+  @override
+  void didChangeDependencies() {
+    // 当State对象的依赖发生变化时会被调用
+    // 典型的场景是当系统语言Locale或应用主题改变时，Flutter framework会通知widget调用此回调
+    super.didChangeDependencies();
+    print("didChangeDependencies");
   }
 }
 
