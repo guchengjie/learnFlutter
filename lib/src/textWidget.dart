@@ -7,21 +7,24 @@ class TextWiTextdget extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Text(
-            '我爱学习' * 6,
-            style: TextStyle(
-              fontSize: 30.0,
-              color: Colors.blue,
-              fontFamily: "courier",
-              height: 1.5,
-              background: Paint()..color = Colors.yellow,
-              decoration: TextDecoration.underline,
-              decorationStyle: TextDecorationStyle.dashed,
-            ),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textScaleFactor: 1.5,
+          child: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: 'home:',
+                  style: TextStyle(
+                    fontSize: 30.0
+                  ),
+                ),
+                TextSpan(
+                  text: 'www.baidu.com',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 30.0
+                  ),
+                )
+              ]
+            )
           ),
         ),
       ),
