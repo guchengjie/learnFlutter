@@ -23,9 +23,6 @@ class SelfStateWidgetState extends State<SelfStateWidget> {
           active: _active,
           onChange: _handleTapboxChanged,
         ),
-      decoration: BoxDecoration(
-        color: _active ? Colors.lightGreen[700] : Colors.grey[600],
-      ),
     );
   }
 }
