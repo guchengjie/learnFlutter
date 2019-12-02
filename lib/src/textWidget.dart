@@ -7,24 +7,27 @@ class TextWiTextdget extends StatelessWidget {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: 'home:',
+          child: DefaultTextStyle(
+            //1.设置文本默认样式  
+            style: TextStyle(
+              color:Colors.red,
+              fontSize: 30.0,
+            ),
+            textAlign: TextAlign.start,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("hello world"),
+                Text("I am Jack"),
+                Text("I am Jack",
                   style: TextStyle(
-                    fontSize: 30.0
+                    inherit: false, //2.不继承默认样式
+                    color: Colors.grey,
+                    fontSize: 35.0
                   ),
                 ),
-                TextSpan(
-                  text: 'www.baidu.com',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 30.0
-                  ),
-                )
-              ]
-            )
+              ],
+            ),
           ),
         ),
       ),
