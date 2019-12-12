@@ -7,8 +7,15 @@ import 'src/FlexLayout.dart';
 import 'src/flowLayout.dart';
 import 'src/StackLayout.dart';
 import 'src/PosiLayout.dart';
+import 'src/container/ConstrainedBox.dart';
 
+// 容器
 import 'src/container/PaddingBox.dart';
+
+// 事件
+import 'src/events/mouseEvent.dart';
+import 'src/events/GestureDetectorEvent.dart';
+import 'src/events/drag.dart';
 
 void main() => runApp(new MyApp());
 
@@ -20,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue, // 应用主题
       ),
-      initialRoute: 'paddingBox', // 设置首页的路由key为“/”
+      initialRoute: 'drag', // 设置首页的路由key为“/”
       routes: { // 路由表
         // 'new_route': (context) => NewRoute(text: ModalRoute.of(context).settings.arguments),
         '/': (context) => new CalculatorPage(title: 'Flutter Demo Home Page'), // 应用首页路由
@@ -33,6 +40,10 @@ class MyApp extends StatelessWidget {
         'stackLayout': (context) => new StackLayout(),
         'posiLayout': (context) => new PosiLayout(),
         'paddingBox': (context) => new PaddingBox(),
+        'constrainedBox': (context) => new ConstraineBox(),
+        'mouseEvent': (context) => new MouseEvent(),
+        'gestureDetectorEvent': (context) => new GestureDetectorEvent(),
+        'drag': (context) => new DragEvent(),
       },
       // 当调用Navigator.pushNamed(...)打开命名路由时，如果指定的路由名在路由表中已注册，则会调用路由表中的builder函数来生成路由组件；
       // 如果路由表中没有注册，才会调用onGenerateRoute来生成路由
