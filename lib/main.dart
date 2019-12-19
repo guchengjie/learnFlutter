@@ -17,6 +17,9 @@ import 'src/events/mouseEvent.dart';
 import 'src/events/GestureDetectorEvent.dart';
 import 'src/events/drag.dart';
 
+// io
+import 'src/fileIOAndAjax/file.dart';
+
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue, // 应用主题
       ),
-      initialRoute: 'drag', // 设置首页的路由key为“/”
+      initialRoute: 'file', // 设置首页的路由key为“/”
       routes: { // 路由表
         // 'new_route': (context) => NewRoute(text: ModalRoute.of(context).settings.arguments),
         '/': (context) => new CalculatorPage(title: 'Flutter Demo Home Page'), // 应用首页路由
@@ -44,6 +47,7 @@ class MyApp extends StatelessWidget {
         'mouseEvent': (context) => new MouseEvent(),
         'gestureDetectorEvent': (context) => new GestureDetectorEvent(),
         'drag': (context) => new DragEvent(),
+        'file': (context) => new FileWidget(),
       },
       // 当调用Navigator.pushNamed(...)打开命名路由时，如果指定的路由名在路由表中已注册，则会调用路由表中的builder函数来生成路由组件；
       // 如果路由表中没有注册，才会调用onGenerateRoute来生成路由
